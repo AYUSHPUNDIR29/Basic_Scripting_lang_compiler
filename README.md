@@ -59,7 +59,3 @@ After building, you can compile a source file:
 - Source files are located in the `src/` directory
 - Header files are in the `include/` directory
 - Add new test cases in the appropriate subdirectory under `tests/`
-
-## License
-
-[Add your license information here] 
