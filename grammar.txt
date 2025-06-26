@@ -1,0 +1,101 @@
+(* Program Entry Point *)
+program ::= { statement } ;
+
+(* Statements *)
+statement ::=
+      variable_declaration ";"
+    | assignment ";"
+    | if_statement
+    | for_loop
+    | function_declaration
+    | function_call ";"
+    | input_statement ";"
+    | publish_statement ";" ;
+
+(* Declarations *)
+variable_declaration ::= "let" identifier "=" expression ;
+assignment            ::= identifier "=" expression ;
+
+(* Control Flow *)
+if_statement ::= "if" "(" expression ")" "{" { statement } "}"
+               [ "else" "{" { statement } "}" ] ;
+
+for_loop ::= "for" "(" for_init ";" expression ";" for_update ")" 
+             "{" { statement } "}" ;
+
+for_init   ::= "let" identifier "=" expression | assignment ;
+for_update ::= assignment ;
+
+(* Functions *)
+function_declaration ::= "function" identifier "(" [ parameter_list ] ")" 
+                         "{" { statement } "}" ;
+
+function_call ::= identifier "(" [ argument_list ] ")" ;
+
+(* I/O *)
+input_statement   ::= "take" identifier ;
+publish_statement ::= "publish" "(" (string | expression) ")" ;
+
+(* Expressions *)
+expression   ::= logical_or ;
+logical_or   ::= logical_and { "||" logical_and } ;
+logical_and  ::= equality { "&&" equality } ;
+equality     ::= comparison { ("==" | "!=") comparison } ;
+comparison   ::= term { ("<" | "<=" | ">" | ">=") term } ;
+term         ::= factor { ("+" | "-") factor } ;
+factor       ::= unary { ("*" | "/" | "%") unary } ;
+unary        ::= ("-" | "!") unary | primary ;
+primary      ::= number
+               | string
+               | identifier
+               | function_call
+               | "(" expression ")" ;
+
+(* Parameters and Arguments *)
+parameter_list ::= identifier { "," identifier } ;
+argument_list  ::= expression { "," expression } ;
+
+(* Types (For future type annotations) *)
+type ::= "int" | "string" ;
+
+(* Lexical Tokens *)
+identifier ::= letter { letter | digit | "_" } ;
+number     ::= digit { digit } ;
+string     ::= '"' { string_char } '"' ;
+
+letter      ::= "a" | "b" | ... | "z" | "A" | "B" | ... | "Z" ;
+digit       ::= "0" | "1" | ... | "9" ;
+string_char ::= any printable character except '"' | escape_sequence ;
+escape_sequence ::= "\\" ( "n" | "t" | "\\" | '"' ) ;
+
+(* Comments *)
+comment ::= "//" { any character except newline } newline
+          | "/*" { any character except "*/" } "*/" ;
+
+(* Whitespace *)
+whitespace ::= space | tab | newline ;
+space      ::= " " ;
+tab        ::= "\t" ;
+newline    ::= "\n" | "\r\n" ;
+
+(* Precedence and Associativity *)
+(* Operators in order of precedence (highest to lowest):
+   1. Unary: -, !
+   2. Multiplicative: *, /, %
+   3. Additive: +, -
+   4. Relational: <, <=, >, >=
+   5. Equality: ==, !=
+   6. Logical AND: &&
+   7. Logical OR: ||
+*)
+
+(* Notes incorporated:
+   1. Semicolons required after all statements except if, for, and function declarations
+   2. String literals support escape sequences: \n, \t, \\, \"
+   3. Supports both single-line and multi-line comments
+   4. Variables are dynamically typed based on their initial value
+   5. Supports int and string types
+   6. All arithmetic operations are integer-based
+   7. publish("text") outputs the text literally; publish(variable) outputs variable value
+   8. take is used to read input into a variable
+*)

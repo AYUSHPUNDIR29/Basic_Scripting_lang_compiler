@@ -1,0 +1,7 @@
+ // Needs: Common Subexpression Elimination
+let x = 5;
+let y = 10;
+let z = x + y;
+let w = x + y; // should be optimized to reuse z
+publish(z);
+publish(w);

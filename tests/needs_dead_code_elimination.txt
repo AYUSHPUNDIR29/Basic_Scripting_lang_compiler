@@ -1,0 +1,6 @@
+ // Needs: Dead Code Elimination
+let a = 10;
+let b = 20;
+let unused = a + b; // should be eliminated
+let c = a * 2;
+publish(c);

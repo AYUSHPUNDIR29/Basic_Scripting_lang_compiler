@@ -1,0 +1,8 @@
+ // Needs: Error Handling (Syntax and Semantic)
+// Syntax error: missing semicolon
+let a = 10
+let b = 20;
+
+// Semantic error: use of undeclared variable
+let c = x + 5;
+publish(c);

@@ -1,0 +1,6 @@
+// Needs: Strength Reduction
+let n = 8;
+let m = n * 2; // should be replaced with n + n
+let p = n * 4; // should be replaced with n + n + n + n
+publish(m);
+publish(p);
