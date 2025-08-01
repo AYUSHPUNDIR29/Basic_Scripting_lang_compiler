@@ -4,7 +4,7 @@ A compiler implementation for a custom programming language.
 
 ## Team Members and their github link
 - [@ayushpundir](https://github.com/AYUSHPUNDIR29)
-
+- [@ireshchand]9https://github.com/Iresh014)
 ## Project Structure
 
 ```
