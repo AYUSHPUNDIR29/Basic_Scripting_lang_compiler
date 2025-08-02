@@ -8,7 +8,7 @@ A compiler implementation for a custom programming language.
 -[@kartikmishra](https://github.com/KARTIKmishra001)
 ## Project Structure
 
-``
+```
 .
 ├── include/         # Header files
 ├── src/            # Source files
